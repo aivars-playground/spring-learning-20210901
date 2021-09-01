@@ -5,8 +5,9 @@ import org.example.model.Person;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HibernatePersonRepositoryImpl {
+public class HibernatePersonRepositoryImpl implements PersonRepository {
 
+    @Override
     public List<Person> findAll() {
 
         List<Person> persons = new ArrayList<>();
