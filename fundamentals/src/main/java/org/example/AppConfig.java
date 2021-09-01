@@ -12,9 +12,7 @@ public class AppConfig {
 
     @Bean(name = "personService")
     public PersonService getPersonService() {
-        PersonServiceImpl personService = new PersonServiceImpl();
-        personService.setRepository(getPersonRepository());
-        return personService;
+        return new PersonServiceImpl(getPersonRepository());
     }
 
     @Bean(name = "personRepository")
