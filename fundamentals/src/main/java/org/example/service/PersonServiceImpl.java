@@ -8,10 +8,14 @@ import java.util.List;
 
 public class PersonServiceImpl implements PersonService {
 
-    private PersonRepository repository = new HibernatePersonRepositoryImpl();
+    private PersonRepository repository;
 
     @Override
     public List<Person> findAll() {
         return repository.findAll();
+    }
+
+    public void setRepository(PersonRepository repository) {
+        this.repository = repository;
     }
 }
