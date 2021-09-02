@@ -29,22 +29,19 @@ public class SessionController {
         return sessionRepository.saveAndFlush(session);
     }
 
-    @GetMapping
-    @RequestMapping("{id}")
+    @GetMapping("{id}")
     public Session read(@PathVariable Integer id) {
         return sessionRepository.getById(id);
     }
 
-    @PutMapping
-    @RequestMapping("{id}")
+    @PutMapping("{id}")
     public Session update(@PathVariable Integer id, @RequestBody Session session) {
         var existingSession = sessionRepository.getById(id);
         BeanUtils.copyProperties(session, existingSession, "session_id");
         return sessionRepository.saveAndFlush(existingSession);
     }
 
-    @DeleteMapping
-    @RequestMapping("{id}")
+    @DeleteMapping("{id}")
     public void delete(@PathVariable Integer id) {
         sessionRepository.deleteById(id);
     }
