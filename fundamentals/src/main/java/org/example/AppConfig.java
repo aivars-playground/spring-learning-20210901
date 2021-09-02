@@ -1,9 +1,5 @@
 package org.example;
 
-import org.example.repository.HibernatePersonRepositoryImpl;
-import org.example.repository.PersonRepository;
-import org.example.service.PersonService;
-import org.example.service.PersonServiceImpl;
 import org.example.util.CalendarFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
