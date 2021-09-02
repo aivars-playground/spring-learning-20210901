@@ -2,6 +2,7 @@ package org.example.controllers;
 
 import org.example.models.Session;
 import org.example.repositories.SessionRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,15 +23,29 @@ public class SessionController {
         return sessionRepository.findAll();
     }
 
-    @GetMapping
-    @RequestMapping("{id}")
-    public Session get(@PathVariable Integer id) {
-        return sessionRepository.getById(id);
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED) //just some semantics... 200 ok or 202 accepted...
     public Session create(@RequestBody Session session) {
         return sessionRepository.saveAndFlush(session);
+    }
+
+    @GetMapping
+    @RequestMapping("{id}")
+    public Session read(@PathVariable Integer id) {
+        return sessionRepository.getById(id);
+    }
+
+    @PutMapping
+    @RequestMapping("{id}")
+    public Session update(@PathVariable Integer id, @RequestBody Session session) {
+        var existingSession = sessionRepository.getById(id);
+        BeanUtils.copyProperties(session, existingSession, "session_id");
+        return sessionRepository.saveAndFlush(existingSession);
+    }
+
+    @DeleteMapping
+    @RequestMapping("{id}")
+    public void delete(@PathVariable Integer id) {
+        sessionRepository.deleteById(id);
     }
 }
