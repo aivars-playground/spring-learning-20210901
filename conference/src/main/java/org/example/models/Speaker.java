@@ -1,12 +1,14 @@
 package org.example.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "speakers")
+@Entity(name = "speakers")
+@JsonIgnoreProperties({"sessions"})
 public class Speaker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

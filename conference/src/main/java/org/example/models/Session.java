@@ -1,12 +1,13 @@
 package org.example.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "sessions")
+@Entity(name = "sessions")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +23,7 @@ public class Session {
     @Column(name = "session_length", nullable = false)
     private Integer sessionLength;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(name = "session_speakers",
             joinColumns = @JoinColumn(name = "session_id"),
             inverseJoinColumns = @JoinColumn(name = "speaker_id"))
