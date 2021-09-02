@@ -1,8 +1,8 @@
-package org.example;
+package org.example.controllers;
 
 import org.example.models.Session;
 import org.example.repositories.SessionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +29,7 @@ public class SessionController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.ACCEPTED) //just some semantics... 200 ok or 202 accepted...
     public Session create(@RequestBody Session session) {
         return sessionRepository.saveAndFlush(session);
     }
