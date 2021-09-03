@@ -1,10 +1,10 @@
-package com.example.bugzilla;
+package com.example.bugtracker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BugzillaApplicationTests {
+class ApplicationTests {
 
     @Test
     void contextLoads() {

@@ -1,0 +1,15 @@
+logging:
+  level:
+    org.springframework: debug
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:bugtracker
+  thymeleaf:
+    template-loader-path: classpath:/templates
+    suffix: .html
+    cache: false
