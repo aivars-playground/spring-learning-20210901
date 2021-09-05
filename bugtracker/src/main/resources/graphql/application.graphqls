@@ -7,7 +7,7 @@ type Application {
 
 type Query {
     findAllApplications: [Application]!
-    countApplications: Long!
+    countApplications: Int!
 }
 
 type Mutation {

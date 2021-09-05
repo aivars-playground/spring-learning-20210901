@@ -1,8 +1,8 @@
 package com.example.bugtracker.resolver;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.example.bugtracker.entity.Application;
 import com.example.bugtracker.repository.ApplicationRepository;
+import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.springframework.stereotype.Component;
 
 @Component

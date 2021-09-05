@@ -30,17 +30,6 @@ public class Application {
     @Column(name = "owner")
     private String owner;
 
-    @OneToMany(mappedBy = "application")
-    private List<Ticket> tickets;
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
-
     public String getOwner() {
         return owner;
     }

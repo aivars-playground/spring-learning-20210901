@@ -1,8 +1,8 @@
 package com.example.bugtracker.resolver;
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.example.bugtracker.entity.Application;
 import com.example.bugtracker.repository.ApplicationRepository;
+import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

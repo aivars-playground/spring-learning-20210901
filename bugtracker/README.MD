@@ -1,3 +1,11 @@
+Actuator
+===
+Healthcheck, monitoring, etc...  
+http://localhost:8080/actuator
+
+
+GRAPHQL
+===
 http://localhost:8080/graphiql
 
 count

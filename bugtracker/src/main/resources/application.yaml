@@ -16,11 +16,17 @@ spring:
 
 graphql:
   servlet:
-    mapping: /graphql
     enabled: true
-    corsEnabled: true
+    exception-handlers-enabled: true
+  graphiql:
+    enabled: true
 
-graphiql:
-  enabled: true
-  endpoint: /graphql
-  mapping: graphiql
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics, loggers, beans, mappings
+  endpoint:
+    health:
+      show-components: always
+      show-details: always

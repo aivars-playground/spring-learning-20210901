@@ -2,6 +2,8 @@ package com.example.bugtracker;
 
 import com.example.bugtracker.entity.Application;
 import com.example.bugtracker.repository.ApplicationRepository;
+import graphql.scalars.ExtendedScalars;
+import graphql.schema.GraphQLScalarType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -21,12 +23,8 @@ public class BugtrackerApplication {
     @Bean
     public CommandLineRunner demo(ApplicationRepository applicationRepository) {
         return (args) -> {
-            applicationRepository.save(new Application("app", "my app", "me"));
-
-            for (Application app: applicationRepository.findAll()) {
-                LOGGER.info("app->"+app.getId());
-            }
+            LOGGER.info("-------ADDING___APP----");
+            var res = applicationRepository.save(new Application("app", "my app", "me"));
         };
     }
-
 }
