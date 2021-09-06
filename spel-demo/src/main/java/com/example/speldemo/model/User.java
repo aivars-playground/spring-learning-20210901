@@ -1,5 +1,7 @@
 package com.example.speldemo.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -8,11 +10,24 @@ import java.util.TimeZone;
 @Component("user")
 public class User {
 
+    @Value("#{'John Doe'}") //default value, not picked in SpelParser2EvaluationContext
     private String name;
     private String country;
     private LocalDate dob;
     private TimeZone defaultTimezone;
     private String os;
+
+    public User() {
+    }
+
+    @Autowired
+    public User(
+            @Value("#{systemProperties['user.country']}") String country,
+            @Value("#{systemProperties['os.name']}") String os
+    ) {
+        this.country = country;
+        this.os = os;
+    }
 
     public String getOs() {
         return os;
