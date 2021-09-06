@@ -3,6 +3,8 @@ package com.example.speldemo.model;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component("order")
 public class Order {
 
@@ -22,6 +24,28 @@ public class Order {
 
     @Value("#{user.country}")
     private String deliveryAddress;
+
+    @Value("#{shipping.locationsByCountry[user.country]}")
+    private List<City> shippingLocations;
+
+    @Value("#{order.shippingLocations.?[isCapital]}")
+    private List<City> shippingCapitals;
+
+    public List<City> getShippingCapitals() {
+        return shippingCapitals;
+    }
+
+    public void setShippingCapitals(List<City> shippingCapitals) {
+        this.shippingCapitals = shippingCapitals;
+    }
+
+    public List<City> getShippingLocations() {
+        return shippingLocations;
+    }
+
+    public void setShippingLocations(List<City> shippingLocations) {
+        this.shippingLocations = shippingLocations;
+    }
 
     public double getAmount() {
         return amount;
