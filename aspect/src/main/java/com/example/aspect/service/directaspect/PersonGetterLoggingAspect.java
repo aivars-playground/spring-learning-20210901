@@ -1,4 +1,4 @@
-package com.example.aspect.service.basic;
+package com.example.aspect.service.directaspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 @Aspect
 @Component
+//will fail if getPerson signature changes
 public class PersonGetterLoggingAspect {
 
     private static Logger LOGGER = Logger.getLogger(PersonGetterLoggingAspect.class.getName());
