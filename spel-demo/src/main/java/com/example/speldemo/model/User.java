@@ -17,6 +17,9 @@ public class User {
     private TimeZone defaultTimezone;
     private String os;
 
+    @Value("#{user.name} is using #{user.os}")
+    private String concatenatedValue;
+
     public User() {
     }
 
@@ -67,6 +70,14 @@ public class User {
 
     public void setDefaultTimezone(TimeZone defaultTimezone) {
         this.defaultTimezone = defaultTimezone;
+    }
+
+    public String getConcatenatedValue() {
+        return concatenatedValue;
+    }
+
+    public void setConcatenatedValue(String concatenatedValue) {
+        this.concatenatedValue = concatenatedValue;
     }
 
     @Override
