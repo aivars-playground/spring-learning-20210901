@@ -33,3 +33,12 @@ create interface - annotation and aspect for annotation
 com.example.aspect.service.alternativeaspect.AlternativeLoggingAnnotation
 com.example.aspect.service.alternativeaspect.AlternativeLoggingAspect
 ```
+
+exceptions
+---
+```
+com.example.aspect.service.exceptionaspect.CustomServiceExceptionAspect
+```
+```http request
+GET http://localhost:8080/api/aopbasics/invokeAlternativeLoggingAspect/0
+```

@@ -9,14 +9,16 @@ public class AopExampleService {
 
     //if signature changes... PersonGetterLoggingAspect will not work....
     public Person getPerson(Long id) {
-        return new Person() {{setId(id);}};
+        return create(id);
     }
 
     @AlternativeLoggingAnnotation
-    public Person getIndividual(Long id) {
+    public Person getIndividual(Long id) { return create(id); }
+
+    private Person create(Long id) {
+        if (id < 1) throw new CustomServiceException("invalid id" + id);
         return new Person() {{setId(id);}};
     }
-
 
 
 }
