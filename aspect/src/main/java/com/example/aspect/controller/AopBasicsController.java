@@ -1,5 +1,7 @@
 package com.example.aspect.controller;
 
+import com.example.aspect.model.MixinForPerson;
+import com.example.aspect.model.MixinForPersonImpl;
 import com.example.aspect.model.Person;
 import com.example.aspect.service.AopExampleService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +15,11 @@ public class AopBasicsController {
 
     private final AopExampleService aopExampleService;
 
-    public AopBasicsController(AopExampleService aopExampleService) {
+    private final Person person;
+
+    public AopBasicsController(AopExampleService aopExampleService, Person person) {
         this.aopExampleService = aopExampleService;
+        this.person = person;
     }
 
     @GetMapping("/invokeLoggingAspect/{id}")
@@ -26,5 +31,12 @@ public class AopBasicsController {
     public Person invokeAlternativeLoggingAspect(@PathVariable Long id) {
         return aopExampleService.getIndividual(id);
     }
+
+    @GetMapping("/persoWithMixin")
+    public MixinForPerson invokeAlternativeLoggingAspect() {
+        ((MixinForPerson)person).setName("this person has a name");
+        return (MixinForPerson)person;
+    }
+
 
 }
