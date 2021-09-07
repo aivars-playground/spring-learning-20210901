@@ -21,3 +21,7 @@ does not seem to be working in a standalone app
  spring.mvc.view.prefix=/WEB-INF/jsp/
  spring.mvc.view.suffix=.jsp
 ```
+___
+@RestController vs @Controller  
+@Controller will try to use template resolver to return web page  
+@RestController would transform String to text/html, class to json
