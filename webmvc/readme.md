@@ -25,3 +25,9 @@ ___
 @RestController vs @Controller  
 @Controller will try to use template resolver to return web page  
 @RestController would transform String to text/html, class to json
+
+___
+useful when some files must be protected... web inf is not browsable
+```http request
+GET http://localhost:8080/files/Screenshot.png
+```

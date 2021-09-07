@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>webmvc</name>
     <description>webmvc</description>
+    <packaging>war</packaging>
     <properties>
         <java.version>16</java.version>
     </properties>
@@ -22,12 +23,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- JSP -->
+        <!-- JSP Resolver-->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
