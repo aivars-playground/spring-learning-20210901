@@ -13,10 +13,11 @@ adding static index page
 
 ___
 adding jsp page
-[WEB](http://localhost:8080/greeting)
+[WEB](http://localhost:8080/jsptemplates/greeting)  
+does not seem to be working in a standalone app
 ```
  ${projectDir}/src/main/webapp/WEB-INF/jsp/greeting.jsp
- com.example.webmvc.controller.GreetingJspController
+ com.example.webmvc.controller.jsptemplate.GreetingJspController
  spring.mvc.view.prefix=/WEB-INF/jsp/
  spring.mvc.view.suffix=.jsp
 ```
