@@ -7,5 +7,10 @@
 </head>
 <body>
 <p>Hello, ${message}!</p>
+
+LANGUAGE
+<a href="?lang=lv">LV</a>
+<a href="?lang=en">EN</a>
+
 </body>
 </html>

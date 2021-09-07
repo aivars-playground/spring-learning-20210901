@@ -28,6 +28,7 @@ public class GreetingJspController {
 
     @PostMapping("/registration")
     public String addRegistration(@ModelAttribute("registration") Registration registration) {
-        return "registration";
+        System.out.println("------------adding registration");
+        return "redirect:registration";
     }
 }

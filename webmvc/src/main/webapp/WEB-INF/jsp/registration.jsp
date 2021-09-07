@@ -22,5 +22,9 @@
             </tr>
         </table>
     </form:form>
+
+    LANGUAGE
+    <a href="?lang=lv">LV</a>
+    <a href="?lang=en">EN</a>
 </body>
 </html>
