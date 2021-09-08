@@ -8,15 +8,28 @@
 <body>
     <title><spring:message code="registration"/></title>
     <form:form modelAttribute="registration">
+        <form:errors path="*" />
         <table>
             <tr>
                 <td><spring:message code="name"/></td>
                 <td>
                     <form:input path="name" />
                 </td>
+                <td>
+                    <form:errors path="name" />
+                </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>id</td>
+                <td>
+                    <form:input path="id" />
+                </td>
+                <td>
+                    <form:errors path="id" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
                     <input type="submit" value=<spring:message code="submit.registration"/>>
                 </td>
             </tr>

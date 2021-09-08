@@ -2,8 +2,10 @@ package com.example.webmvc.controller.jspstyle;
 
 import com.example.webmvc.model.Registration;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -27,8 +29,15 @@ public class GreetingJspController {
     }
 
     @PostMapping("/registration")
-    public String addRegistration(@ModelAttribute("registration") Registration registration) {
-        System.out.println("------------adding registration");
-        return "redirect:registration";
+    public String addRegistration(
+            @Valid @ModelAttribute("registration") Registration registration,
+            BindingResult bindingResult
+    ) {
+        System.out.println("------------process registration, errors:"+bindingResult.hasErrors());
+        if (bindingResult.hasErrors()) {
+            return "jsp/registration";
+        } else {
+            return "redirect:registration";
+        }
     }
 }
