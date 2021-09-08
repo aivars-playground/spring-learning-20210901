@@ -18,26 +18,12 @@ URI strategy
 Approach: different URIs  
 PROS: invalidates cache since urls are different  
 CONS: need two separate test setups
-```
-//keep both versions on one app
-@RequestMapping("api/v1/url_strategy")
-com.example.versioning.controller.uristrategy.UriStrategyControllerV1
-
-@RequestMapping("api/v2/url_strategy")
-com.example.versioning.controller.uristrategy.UriStrategyControllerV2
-
-//use two deployed apps
-spring.data.rest.basePath=api/v1
-//and 
-spring.data.rest.basePath=api/v2
-// issues - some components are @BasePathAware, other are not ....
-```
 ```http request
 ###
 GET http://localhost:8080/api/v1/url_strategy/endpoint
 
 ### V2
-GET http://localhost:8080/api/v1/url_strategy/endpoint
+GET http://localhost:8080/api/v2/url_strategy/endpoint
 ```
 
 Request Parameter strategy
