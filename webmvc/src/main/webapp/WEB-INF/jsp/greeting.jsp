@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Greeting</title>

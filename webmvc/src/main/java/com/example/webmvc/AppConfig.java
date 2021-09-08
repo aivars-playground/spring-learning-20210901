@@ -37,7 +37,7 @@ public class AppConfig implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
-        sessionLocaleResolver.setDefaultLocale(Locale.US);
+        sessionLocaleResolver.setDefaultLocale(Locale.ENGLISH);
         return sessionLocaleResolver;
     }
 
@@ -53,11 +53,12 @@ public class AppConfig implements WebMvcConfigurer {
         return localeChangeInterceptor;
     }
 
-    @Bean(name = "messageSource")
-    public ResourceBundleMessageSource getMessageSource() throws Exception {
-        ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
-        resourceBundleMessageSource.setDefaultEncoding("UTF-8");
-        resourceBundleMessageSource.setBasenames("i18n/messages");
-        return resourceBundleMessageSource;
-    }
+//replaced with spring.messages.basename=i18n/messages
+//    @Bean(name = "messageSource")
+//    public ResourceBundleMessageSource getMessageSource() throws Exception {
+//        ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
+//        resourceBundleMessageSource.setDefaultEncoding("UTF-8");
+//        resourceBundleMessageSource.setBasenames("i18n/messages");
+//        return resourceBundleMessageSource;
+//    }
 }
