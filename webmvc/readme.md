@@ -17,7 +17,7 @@ adding jsp page
 does not seem to be working in a standalone app
 ```
  ${projectDir}/src/main/webapp/WEB-INF/jsp/greeting.jsp
- com.example.webmvc.controller.jsptemplate.GreetingJspController
+ com.example.webmvc.controller.jspstyle.GreetingJspController
  spring.mvc.view.prefix=/WEB-INF/jsp/
  spring.mvc.view.suffix=.jsp
 ```
@@ -30,4 +30,13 @@ ___
 useful when some files must be protected... web inf is not browsable
 ```http request
 GET http://localhost:8080/files/Screenshot.png
+```
+
+___
+adding both thymeleaf and jsp resolvers  
+```
+com.example.webmvc.AppConfig
+```
+```http request
+GET http://localhost:8080/thymeleaftemplates/example
 ```

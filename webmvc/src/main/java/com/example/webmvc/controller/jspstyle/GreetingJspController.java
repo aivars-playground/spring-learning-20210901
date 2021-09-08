@@ -1,4 +1,4 @@
-package com.example.webmvc.controller.jsptemplate;
+package com.example.webmvc.controller.jspstyle;
 
 import com.example.webmvc.model.Registration;
 import org.springframework.stereotype.Controller;
@@ -18,12 +18,12 @@ public class GreetingJspController {
             @RequestParam(value = "name", defaultValue = "???") String name
     ) {
         model.put("message", name);
-        return "greeting";
+        return "jsp/greeting";
     }
 
     @GetMapping("/registration")
     public String getRegistration(@ModelAttribute("registration") Registration registration) {
-        return "registration";
+        return "jsp/registration";
     }
 
     @PostMapping("/registration")
