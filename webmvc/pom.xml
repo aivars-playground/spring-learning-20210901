@@ -31,6 +31,11 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+
         <!-- JSP Resolver-->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>

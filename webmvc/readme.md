@@ -40,3 +40,43 @@ com.example.webmvc.AppConfig
 ```http request
 GET http://localhost:8080/thymeleaftemplates/example
 ```
+
+___
+rest controller can return multiple response Mime types:
+```xml
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+```
+```java
+    @GetMapping(
+            value = "/example_user/1",
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+    )
+    public User getUser() {
+        return new User(){{setFirstName("FN");setLastName("LN");}};
+    }
+```
+```http request
+###
+GET http://localhost:8080/resttexample/example_user/1
+Accept: application/xml
+
+###
+GET http://localhost:8080/resttexample/example_user/1
+Accept: application/json
+```
+
+default content type could be set in config bean
+```java
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.defaultContentType(MediaType.APPLICATION_JSON);
+    }
+```
+thus enabling as json
+```http request
+###
+GET http://localhost:8080/resttexample/example_user/1
+```
