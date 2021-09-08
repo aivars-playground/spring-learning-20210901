@@ -7,19 +7,30 @@ Strategies:
 * Custom Header
 * No strategy
 
+Notes:
+* Stick to single digit version, increase only for breaking changes...
+* If minor changes are not breaking client, new version might not be required...
+* Minor frequent version bumps might annoy client...
+
+
 URI strategy
 -
 Approach: different URIs  
 PROS: invalidates cache since urls are different  
 CONS: need two separate test setups
-```java
-@RestController()
+```
+//keep both versions on one app
 @RequestMapping("api/v1/url_strategy")
-class Controller1 {}
+com.example.versioning.controller.uristrategy.UriStrategyControllerV1
 
-@RestController()
 @RequestMapping("api/v2/url_strategy")
-class Controller2 {}
+com.example.versioning.controller.uristrategy.UriStrategyControllerV2
+
+//use two deployed apps
+spring.data.rest.basePath=api/v1
+//and 
+spring.data.rest.basePath=api/v2
+// issues - some components are @BasePathAware, other are not ....
 ```
 ```http request
 ###
@@ -64,11 +75,11 @@ PROS: one endpoint
 ```http request
 ### V1
 GET http://localhost:8080/api/cust_header_strategy/endpoint
-My-Custom-API-Version-Header: v1
+My-Custom-API-Version-Header: V1
 
 ### V2
 GET http://localhost:8080/api/media_strategy/endpoint
-My-Custom-API-Version-Header: v2
+My-Custom-API-Version-Header: V2
 ```
 
 No strategy
