@@ -1,4 +1,4 @@
-package com.example.springdataoverview;
+package example.dataoverview;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

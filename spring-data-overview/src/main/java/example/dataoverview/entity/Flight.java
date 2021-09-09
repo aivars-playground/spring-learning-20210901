@@ -1,4 +1,4 @@
-package com.example.springdataoverview.entity;
+package example.dataoverview.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
