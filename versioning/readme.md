@@ -24,9 +24,6 @@ Solution - deploy both, use load balancer based on URI path
 ```properties
 #application-baseV1.properties
 spring.data.rest.base-path=v1
-
-#application-baseV2.properties
-spring.data.rest.base-path=v2
 ```
 ```shell
 mvn org.springframework.boot:spring-boot-maven-plugin:run -Dspring-boot.run.profiles=baseV1
@@ -62,14 +59,21 @@ GET http://localhost:8080/api/parameter_strategy/endpoint?version=v2
 Media type strategy
 -
 Approach: use vnd (vendor specific) Media Types
+```java
+@GetMapping(value = "/endpoint", produces = "application/vnd.example.api.v1+json")
+```
 ```http request
 ### V1
-GET http://localhost:8080/api/media_strategy/endpoint
-Accept: application/vnd.example.v1+json
+GET http://localhost:8080/api/custom_media/endpoint
+Accept: application/vnd.example.api.v1+json
+
+# returns
+# HTTP/1.1 200 
+# Content-Type: application/vnd.example.api.v1+json
 
 ### V2
-GET http://localhost:8080/api/media_strategy/endpoint
-Accept: application/vnd.example.v2+json
+GET http://localhost:8080/api/custom_media/endpoint
+Accept: application/vnd.example.api.v2+json
 ```
 
 Custom Header strategy
