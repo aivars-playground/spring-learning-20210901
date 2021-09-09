@@ -5,7 +5,7 @@ Strategies:
   * path
   * request parameter
 * HEADER
-  * Media Type
+  * custom Media Type  (vnd - vendor specific)
   * custom header
 * NO STRATEGY
 
@@ -61,9 +61,7 @@ GET http://localhost:8080/api/parameter_strategy/endpoint?version=v2
 
 Media type strategy
 -
-Approach: use vnd (vendor specific) Media Types  
-PROS: one endpoint  
-CONS: non-standard (possibly, confusing) Media Type
+Approach: use vnd (vendor specific) Media Types
 ```http request
 ### V1
 GET http://localhost:8080/api/media_strategy/endpoint
@@ -77,15 +75,17 @@ Accept: application/vnd.example.v2+json
 Custom Header strategy
 -
 Approach: define custom header  
-PROS: one endpoint
+```java
+@GetMapping(value = "/endpoint", headers =  "Accept-version=v1")
+```
 ```http request
-### V1
-GET http://localhost:8080/api/cust_header_strategy/endpoint
-My-Custom-API-Version-Header: V1
+###
+GET http://localhost:8080/api/custom_header/endpoint
+Accept-version:v1
 
-### V2
-GET http://localhost:8080/api/media_strategy/endpoint
-My-Custom-API-Version-Header: V2
+###
+GET http://localhost:8080/api/custom_header/endpoint
+Accept-version:v2
 ```
 
 No strategy
