@@ -2,28 +2,48 @@ VERSIONING
 =
 Strategies:
 * URI
-* Request Parameter
-* Media type
-* Custom Header
-* No strategy
+  * path
+  * request parameter
+* HEADER
+  * Media Type
+  * custom header
+* NO STRATEGY
 
 Notes:
-* Stick to single digit version, increase only for breaking changes...
+* Use single digit version, increase only for breaking changes...
 * If minor changes are not breaking client, new version might not be required...
 * Minor frequent version bumps might annoy client...
+* Do not add multiple versions in a single app. use branches, concurrent deployments...
 
 
-URI strategy
+URI path strategy
 -
-Approach: different URIs  
-PROS: invalidates cache since urls are different  
-CONS: need two separate test setups
+Approach: different URI base paths  
+Note: base path is optional...  
+Solution - deploy both, use load balancer based on URI path
+```properties
+#application-baseV1.properties
+spring.data.rest.base-path=v1
+
+#application-baseV2.properties
+spring.data.rest.base-path=v2
+```
+```shell
+mvn org.springframework.boot:spring-boot-maven-plugin:run -Dspring-boot.run.profiles=baseV1
+mvn org.springframework.boot:spring-boot-maven-plugin:run -Dspring-boot.run.profiles=baseV2
+```
 ```http request
-###
-GET http://localhost:8080/api/v1/url_strategy/endpoint
+### V1
+GET http://localhost:8081/v1/api/path_strategy/endpoint
+### Also V1 (base path is optional)
+GET http://localhost:8081/api/path_strategy/endpoint
+### V2 wpuld not work on V1 service...
+GET http://localhost:8081/v2/api/path_strategy/endpoint
 
 ### V2
-GET http://localhost:8080/api/v2/url_strategy/endpoint
+GET http://localhost:8082/v2/api/path_strategy/endpoint
+### Also V2 (base path is optional)
+GET http://localhost:8082/api/path_strategy/endpoint
 ```
 
 Request Parameter strategy
@@ -33,10 +53,10 @@ PROS: could be easy to implement
 CONS: separate test setup, possible overlap of business-specific parameters, difficult routing
 ```http request
 ### V1
-GET http://localhost:8080/api/parameter_strategy/endpoint?version=1
+GET http://localhost:8080/api/parameter_strategy/endpoint?version=v1
 
 ### V2
-GET http://localhost:8080/api/parameter_strategy/endpoint?version=2
+GET http://localhost:8080/api/parameter_strategy/endpoint?version=v2
 ```
 
 Media type strategy
