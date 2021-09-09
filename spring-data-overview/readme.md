@@ -48,3 +48,14 @@ public interface FlightRepository extends CrudRepository<Flight, Long> {
     List<Flight> findByScheduledAtBetween(LocalDateTime from, LocalDateTime to);
 }
 ```
+
+Paginated repository
+=
+Paginated repository supports derived queries
+
+!IMPORTANT! Use interface Pageable, not PageRequest!!!!!
+```java
+public interface PaginatedFlightRepository extends PagingAndSortingRepository<Flight, Long> {
+    Page<Flight> findByOriginOrderByScheduledAtDesc(String origin, Pageable pageable);
+}
+```
