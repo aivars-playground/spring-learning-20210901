@@ -1,10 +1,10 @@
-package com.example.springsataoverview;
+package com.example.springdataoverview;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringSataOverviewApplicationTests {
+class SpringDataOverviewApplicationTests {
 
     @Test
     void contextLoads() {
