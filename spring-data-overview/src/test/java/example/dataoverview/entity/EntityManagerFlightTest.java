@@ -13,7 +13,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest //loads only subset of Spring functionality, quicker testing...
-public class FlightTest {
+public class EntityManagerFlightTest {
 
     @Autowired
     EntityManager entityManager;
@@ -23,7 +23,7 @@ public class FlightTest {
 
         Flight flight = new Flight();
         flight.setOrigin("RIX");
-        flight.setOrigin("NCL");
+        flight.setDestination("NCL");
         flight.setScheduledAt(LocalDateTime.of(2020,1,1,1,1));
         entityManager.persist(flight);
 

@@ -21,7 +21,7 @@ class FlightRepositoryTest {
 
         Flight flight = new Flight();
         flight.setOrigin("RIX");
-        flight.setOrigin("NCL");
+        flight.setDestination("NCL");
         flight.setScheduledAt(LocalDateTime.of(2020, 1, 1, 1, 1));
 
         assertThat(flightRepository.findAll())
