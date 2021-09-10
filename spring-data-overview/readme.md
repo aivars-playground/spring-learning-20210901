@@ -59,3 +59,22 @@ public interface PaginatedFlightRepository extends PagingAndSortingRepository<Fl
     Page<Flight> findByOriginOrderByScheduledAtDesc(String origin, Pageable pageable);
 }
 ```
+
+Note!!!
+=
+All derived (and standard) van be added to a top level item - Repository
+```java
+public interface FlightRep extends Repository<Flight, Long> {
+    <S extends Flight> S save(S entity); //use correct signature!!!!
+    List<Flight> findAll();
+    List<Flight> findByOrigin(String origin);
+    Page<Flight> findByOriginOrderByScheduledAtDesc(String origin, Pageable pageable); //use correct signature!!!!
+}
+```
+
+Derived Query capabilities
+=
+Derived Queries can be used to remove data as well
+```java
+void removeFlightByScheduledAt(LocalDateTime scheduledAt);
+```
