@@ -16,6 +16,6 @@ class DemoControllerTest {
     @Test
     void test() {
         assertThat(demoController.selectedDatabase())
-                .isEqualTo("demo");
+                .isEqualTo("TESTDB");
     }
 }
