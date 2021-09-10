@@ -49,5 +49,4 @@ class CustomJdbcRepositoryTest {
         assertThat(customJdbcRepository.getFlights())
                 .isEmpty();
     }
-
 }
