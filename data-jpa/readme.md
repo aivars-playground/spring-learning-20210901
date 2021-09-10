@@ -21,3 +21,15 @@ public class MyExtendedFlightRepositoryProxyStrategy {
     }
 }
 ```
+
+derived queries / query dsl
+-
+```java
+class FlightJpaRepository{
+        //Derived Query / Query DSL //compiles to JPQL -> SQL
+        List<Flight> findByOrigin(String origin);
+        int countAllByDestination();
+        Flight findTopByDestination();
+}
+```
+
