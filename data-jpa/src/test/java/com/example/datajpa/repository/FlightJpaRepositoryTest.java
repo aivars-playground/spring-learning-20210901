@@ -7,14 +7,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class FlightRepositoryTest {
+class FlightJpaRepositoryTest {
 
     @Autowired
-    FlightRepository flightRepository;
+    FlightJpaRepository flightJpaRepository;
 
     @Test
     void emptyRepository() {
-        assertThat(flightRepository.findAll())
+        assertThat(flightJpaRepository.findAll())
                 .hasSize(0);
     }
 }
