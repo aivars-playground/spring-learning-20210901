@@ -3,6 +3,7 @@ package com.example.datajdbc.repository;
 import com.example.datajdbc.model.Flight;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -62,20 +63,38 @@ public class CustomJdbcRepository {
         return flights;
     }
 
-    public List<Flight> getFlightsLambda() {
-        //using template method design pattern
-        List<Flight> flights = jdbcTemplate.query("select * from flight", (rs, rowNum) -> {
-                    Flight flight = new Flight();
-                    flight.setId(rs.getInt("id"));
-                    flight.setOrigin(rs.getString("origin"));
-                    flight.setDestination(rs.getString("destination"));
-                    flight.setDuration(rs.getInt("duration"));
-                    return flight;
-                });
-
-        return flights;
+    public void update(Flight flight) {
+        jdbcTemplate.update("update flight set origin=?,destination=?, duration=? where id=?", flight.getOrigin(), flight.getDestination(), flight.getDuration(), flight.getId());
     }
 
+    public Flight getOne(Integer id) {
+        //using template method design pattern
+        Flight flight = jdbcTemplate.queryForObject("select * from flight", (rs, rowNum) -> {
+            Flight flight1 = new Flight();
+            flight1.setId(rs.getInt("id"));
+            flight1.setOrigin(rs.getString("origin"));
+            flight1.setDestination(rs.getString("destination"));
+            flight1.setDuration(rs.getInt("duration"));
+            return flight1;
+        });
+
+        return flight;
+    }
+
+
+
+    public void deleteById(Integer id) {
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+
+        namedParameterJdbcTemplate.update(
+                "delete from flight where id = :id",
+                paramMap
+        );
+
+    }
 
 
 }

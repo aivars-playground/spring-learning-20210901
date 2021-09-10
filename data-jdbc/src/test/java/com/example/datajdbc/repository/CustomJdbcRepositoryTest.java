@@ -29,14 +29,25 @@ class CustomJdbcRepositoryTest {
         flight.setDestination("NCL");
         flight.setDuration(11);
 
-        customJdbcRepository.createWithSimpleInsertMapping(flight);
+        var id = customJdbcRepository.createWithSimpleInsertMapping(flight);
 
         assertThat(customJdbcRepository.getFlights())
                 .usingRecursiveComparison(RecursiveComparisonConfiguration.builder().withIgnoredFields("id").build())
                 .ignoringCollectionOrder()
                 .isEqualTo(List.of(flight));
 
+        Flight update = new Flight();
+        update.setId(id);
+        update.setOrigin("RIX");
+        update.setDestination("DFW");
+        update.setDuration(11);
+        customJdbcRepository.update(update);
 
+        assertThat(customJdbcRepository.getOne(id)).usingRecursiveComparison().isEqualTo(update);
+
+        customJdbcRepository.deleteById(id);
+        assertThat(customJdbcRepository.getFlights())
+                .isEmpty();
     }
 
 }
