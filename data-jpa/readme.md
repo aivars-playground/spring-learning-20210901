@@ -21,6 +21,10 @@ public class MyExtendedFlightRepositoryProxyStrategy {
     }
 }
 ```
+or mixin
+```java
+MyExtendedFlightRepositoryMixinStrategy
+```
 
 derived queries / query dsl
 -
