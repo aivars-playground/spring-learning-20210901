@@ -37,3 +37,9 @@ class FlightJpaRepository{
 }
 ```
 
+JPQL examples
+-
+```
+AirplaneRepositoryWithJPQL
+```
+
