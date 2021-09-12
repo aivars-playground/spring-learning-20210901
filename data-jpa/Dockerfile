@@ -2,6 +2,7 @@
 # Build stage
 #
 FROM maven:3.8.2-openjdk-16-slim AS build
+LABEL stage=builder
 COPY src /home/app/src
 COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip=true
