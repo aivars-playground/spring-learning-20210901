@@ -5,6 +5,7 @@ import com.example.datamongo.documents.Manufacturer;
 import com.example.datamongo.repository.AircraftMongoRepository;
 import com.example.datamongo.repository.AircraftRepository;
 import com.example.datamongo.repository.ManufacturerRepo;
+import com.example.datamongo.repository.ManufacturerRepoWithTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,9 @@ public class AircraftController {
 
     @Resource
     ManufacturerRepo manufacturerRepo;
+
+    @Resource
+    ManufacturerRepoWithTemplate manufacturerRepoWithTemplate;
 
     @GetMapping("/testme")
     void testMe() {
@@ -43,6 +47,14 @@ public class AircraftController {
     @GetMapping("/readme")
     List<Aircraft> readme() {
         return aircraftMongoRepository.findAll();
+    }
+
+    @GetMapping("/testTemplate")
+    Manufacturer testTemplate() {
+        Manufacturer raf = new Manufacturer();
+        raf.setName("RAF");
+        raf.setCountry("LV");
+        return  manufacturerRepoWithTemplate.save(raf);
     }
 
 
