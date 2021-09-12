@@ -47,3 +47,12 @@ JPQL examples
 AirplaneRepositoryWithJPQL
 ```
 
+Projection
+-
+Java record can be a projection
+```
+    @Query(
+            "select new com.example.datajpa.projections.FlightModelProjection(flight.source) from Flight flight"
+    )
+    List<FlightModelProjection> findProjections();
+```

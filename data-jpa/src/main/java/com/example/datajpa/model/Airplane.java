@@ -1,5 +1,7 @@
 package com.example.datajpa.model;
 
+import com.example.datajpa.projections.FlightModelProjection;
+
 import javax.persistence.*;
 import java.util.List;
 
