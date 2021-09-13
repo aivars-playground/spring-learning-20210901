@@ -1,29 +1,12 @@
-setup
-=
-start mongo image
-```shell
-docker-compose up -d
-```
+package com.example.datamongo.documents;
 
-note
--
-Both MongoRepository and Crud repository interfaces are working  
-Query dsl is supported
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
+import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
+import org.springframework.stereotype.Component;
 
-Mongo Template
--
-some functionality without creating repo
-```java
- @Resource
-    MongoTemplate mongoTemplate;
+import javax.annotation.Resource;
 
- mongoTemplate.save(manufacturer);
-```
-
-Cascading
-=
-Mongo does not cascade, use 
-```
 @Component
 public class ParentCascadeEventListener extends AbstractMongoEventListener<Parent> {
     @Resource
@@ -38,7 +21,3 @@ public class ParentCascadeEventListener extends AbstractMongoEventListener<Paren
         }
     }
 }
-```
-Note
--
-Generic listener could be created with reflection...

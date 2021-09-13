@@ -1,11 +1,10 @@
 package com.example.datamongo.controller;
 
 import com.example.datamongo.documents.Aircraft;
+import com.example.datamongo.documents.Child;
 import com.example.datamongo.documents.Manufacturer;
-import com.example.datamongo.repository.AircraftMongoRepository;
-import com.example.datamongo.repository.AircraftRepository;
-import com.example.datamongo.repository.ManufacturerRepo;
-import com.example.datamongo.repository.ManufacturerRepoWithTemplate;
+import com.example.datamongo.documents.Parent;
+import com.example.datamongo.repository.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -32,6 +31,9 @@ public class AircraftController {
 
     @Resource
     ManufacturerRepoWithTemplate manufacturerRepoWithTemplate;
+
+    @Resource
+    ParentRepository parentRepository;
 
     @GetMapping("/addTestData")
     void addTestData() {
@@ -114,6 +116,19 @@ public class AircraftController {
     @GetMapping("/removeManufacturersWithTemplate")
     List<Manufacturer> removeManufacturersWithTemplate() {
         return manufacturerRepoWithTemplate.removeAll();
+    }
+
+    @GetMapping("/cascade")
+    Parent cascade() {
+        Parent parent = new Parent();
+        parent.setName("p1");
+
+        Child child = new Child();
+        child.setName("c1");
+
+        parent.setChild(child);
+
+        return parentRepository.save(parent);
     }
 
 }
