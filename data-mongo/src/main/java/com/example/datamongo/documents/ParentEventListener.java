@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Component
-public class ParentCascadeEventListener extends AbstractMongoEventListener<Parent> {
+public class ParentEventListener extends AbstractMongoEventListener<Parent> {
     @Resource
     private MongoOperations mongoOperations;
 

@@ -1,15 +1,11 @@
 package com.example.datamongo.controller;
 
-import com.example.datamongo.documents.Aircraft;
-import com.example.datamongo.documents.Child;
-import com.example.datamongo.documents.Manufacturer;
-import com.example.datamongo.documents.Parent;
+import com.example.datamongo.documents.*;
 import com.example.datamongo.repository.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.TextCriteria;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +27,9 @@ public class AircraftController {
 
     @Resource
     ManufacturerRepoWithTemplate manufacturerRepoWithTemplate;
+
+    @Resource
+    ParentWithAnnotationRepository parentWithAnnotationRepository;
 
     @Resource
     ParentRepository parentRepository;
@@ -129,6 +128,19 @@ public class AircraftController {
         parent.setChild(child);
 
         return parentRepository.save(parent);
+    }
+
+    @GetMapping("/cascadeWithAnnotation")
+    ParentWithAnnotation cascadeWithAnnotation() {
+        ParentWithAnnotation pwa1 = new ParentWithAnnotation();
+        pwa1.setName("pwa1");
+
+        Child child = new Child();
+        child.setName("c_for_pwa1");
+
+        pwa1.setChild(child);
+
+        return parentWithAnnotationRepository.save(pwa1);
     }
 
 }
