@@ -13,11 +13,13 @@ public class Aircraft {
     @Id
     private String id;
 
-    @TextIndexed()
+    @Indexed(name = "tn_idx_2")
+    @TextIndexed(weight = 1) // default weight
     private String model;
 
     @Field("tail_nr")
     @Indexed(name = "tn_idx_1", unique = true)
+    @TextIndexed() // weight
     private String tailNr;
 
     @DBRef
