@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" />
+    <title>Sign-in</title>
+</head>
+<body>
+<p th:if="${loginError}" class="error">Error</p>
+<p th:if="${verified}" class="info">OK</p>
+<form th:action="@{/login}" method="post">
+    <input type="text" name = "username" placeholder="Username" required autofocus>
+    <input type="password" name = "password" placeholder="Password" required>
+    <button type="submit">Sign in</button>
+</form>
+</body>
+</html>

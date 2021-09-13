@@ -16,3 +16,21 @@ http://localhost:8080/actuator/health
 http://localhost:8080/actuator/health
 Authorization: Basic user <token from console>
 ```
+
+basic auth
+-
+no login, logout screen... triggers l/p popup
+actuator/health is authorised as well...
+```java
+@Configuration
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        System.out.println("------------------------------------");
+        http.authorizeRequests()
+                .anyRequest().authenticated()
+                .and().httpBasic();
+    }
+}
+```
