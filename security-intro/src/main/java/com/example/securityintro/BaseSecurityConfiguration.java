@@ -28,7 +28,9 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         System.out.println("---BaseSecurityConfiguration.configure(HttpSecurity http)");
         //@formatter:off
-        http.authorizeRequests()
+        http
+                //.headers().cacheControl().disable() <!-- not good idea to mess with cache globally.... -->
+                .authorizeRequests()
                     .mvcMatchers("/").permitAll()
                     .mvcMatchers("/actuator/health").permitAll()
                 .and().authorizeRequests()
