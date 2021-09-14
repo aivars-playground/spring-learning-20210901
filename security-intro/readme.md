@@ -50,3 +50,10 @@ passwords are:
                 .withUser("user").password("{noop}pass").roles();
     }
 ```
+
+Actuator role:
+```java
+management.endpoint.health.show-components=when_authorized
+management.endpoint.health.show-details=when_authorized
+management.security.roles=ACTUATOR_ADMIN
+```
