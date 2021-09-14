@@ -109,7 +109,7 @@ there are cookies.. for current session
 Ceatinag a self-signed certificate
 =
 ```shell
-keytool -genkey -alias mycertificate -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p121 -validity 1
+keytool -genkey -alias mycertificate -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 1
 ```
 ```properties
 server.port=8443
