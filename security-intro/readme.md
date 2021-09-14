@@ -34,3 +34,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 }
 ```
+
+in memory authentication
+-
+passwords are:
+*stored as is: {noop}plainext
+*stored with given encoding {encType}encodedPassword
+```java
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        auth.inMemoryAuthentication()
+                .withUser("admin").password(encoder.encode("nimda")).roles("ADMIN")
+                .and()
+                .withUser("user").password("{noop}pass").roles();
+    }
+```
