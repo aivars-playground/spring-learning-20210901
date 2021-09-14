@@ -1,16 +1,25 @@
 package com.example.securityintro;
 
-import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+
+import javax.annotation.Resource;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Configuration
 public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -18,10 +27,9 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         System.out.println("---BaseSecurityConfiguration.configure(HttpSecurity http)");
+        //@formatter:off
         http.authorizeRequests()
                     .mvcMatchers("/").permitAll()
-                    .mvcMatchers("/login").permitAll()
-                    .mvcMatchers("/logout").permitAll()
                     .mvcMatchers("/actuator/health").permitAll()
                 .and().authorizeRequests()
                     .mvcMatchers("/actuator").hasRole("ACTUATOR_ADMIN")
@@ -32,8 +40,37 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .and().formLogin()
                 .and().authorizeRequests()
                     .anyRequest().authenticated()
-                    .and().formLogin().loginPage("/login")
-                    .and().logout().logoutSuccessUrl("/");
+                    .and().formLogin()
+                        .loginPage("/login")
+                        .successHandler(getAuthSuccessHandler())
+                        .failureHandler(getAuthFailureHandler())
+                        .permitAll()
+                    .and().logout()
+                        .logoutSuccessUrl("/")
+                        .permitAll();
+        //@formatter:on
+    }
+
+    @Bean
+    AuthenticationSuccessHandler getAuthSuccessHandler() {
+        return new SavedRequestAwareAuthenticationSuccessHandler() {
+            @Override
+            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
+                System.out.println("--------------Success:"+authentication);
+                super.onAuthenticationSuccess(request, response, authentication);
+            }
+        };
+    }
+
+    @Bean
+    AuthenticationFailureHandler getAuthFailureHandler() {
+        return new SimpleUrlAuthenticationFailureHandler() {
+            @Override
+            public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+                System.out.println("--------------Failure:"+exception);
+                super.onAuthenticationFailure(request, response, exception);
+            }
+        };
     }
 
     @Override
