@@ -105,3 +105,17 @@ NOTE
 =
 Intellij HTTP  client starts session, and stores data under .idea/httpRequests  
 there are cookies.. for current session
+
+Ceatinag a self-signed certificate
+=
+```shell
+keytool -genkey -alias mycertificate -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p121 -validity 1
+```
+```properties
+server.port=8443
+server.ssl.key-store-password=password
+server.ssl.key-store=classpath:keystore.p12
+server.ssl.key-store-type=PKCS12
+server.ssl.key-alias=mycertificate
+```
+connection can be redirected from 8080 to 8443 with a redirect connector...
