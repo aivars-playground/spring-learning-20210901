@@ -106,7 +106,7 @@ NOTE
 Intellij HTTP  client starts session, and stores data under .idea/httpRequests  
 there are cookies.. for current session
 
-Ceatinag a self-signed certificate
+Creating a self-signed certificate
 =
 ```shell
 keytool -genkey -alias mycertificate -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 1
@@ -119,3 +119,24 @@ server.ssl.key-store-type=PKCS12
 server.ssl.key-alias=mycertificate
 ```
 connection can be redirected from 8080 to 8443 with a redirect connector...
+
+Encrypt properties file
+===
+* Download jasypt
+```shell
+./jasypt/encrypt.sh input=password password=secret
+----OUTPUT----------------------
+Algorithm:PBEWithMD5AndDES
+n5UxejgIJYANcGvv3OXynxf7lDVrfNRn
+```
+```xml
+<dependency>
+    <groupId>com.github.ulisesbocchio</groupId>
+    <artifactId>jasypt-spring-boot-starter</artifactId>
+    <version>3.0.4</version>
+</dependency>
+```
+```properties
+server.ssl.key-store-password=ENC(n5UxejgIJYANcGvv3OXynxf7lDVrfNRn)
+```
+
