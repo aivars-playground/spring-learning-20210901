@@ -9,16 +9,22 @@
     <link href="webjars/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<c:if test="${not empty param.error}">
+    ERR in param!!!
+</c:if>
 <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION.message}">
     <div class="error">
-        <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+        LAST_EXCEPTION: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
     </div>
 </c:if>
 <form:form action="perform_login" method="post">
     <form:errors path="*" element="div" />
-    <input type="text" name="username" placeholder="username" />
-    <input type="password" name="password" placeholder="password" />
-    <input type="submit" role="button" value="LOGIN">
+    <il>
+        <li /><input type="text" name="username" placeholder="username" />
+        <li /><input type="password" name="password" placeholder="password" />
+        <li /><input type="submit" role="button" value="LOGIN">
+        <li /><input type="checkbox" name="remember-me">
+    </il>
 </form:form>
 </body>
 </html>

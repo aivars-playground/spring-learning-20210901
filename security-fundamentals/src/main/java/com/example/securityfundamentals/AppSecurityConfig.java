@@ -15,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -35,15 +37,23 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/assets/css/**", "/assets/js/**", "/assets/images/**", "/webjars/**").permitAll()
                 .antMatchers("/", "/index.html").permitAll()
                 .anyRequest().authenticated()
+
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .successHandler(getAuthSuccessHandler())
+                //.successHandler(getAuthSuccessHandler())
                 //.failureHandler(getAuthFailureHandler()) //does not show error in log page...
-                .permitAll()
+                .loginPage("/login")
                 .loginProcessingUrl("/perform_login")    //no need to implement, has default implementation
-                .defaultSuccessUrl("/index.html", true);
+                .failureUrl("/login?error=true")         //login?error is not picked up <c:if test="${not empty param.error}">, need /login?error=true
+                .permitAll()
 
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/perform_logout", "GET"))
+                .logoutSuccessUrl("/login?logout=true")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll()
         ;
     }
 
