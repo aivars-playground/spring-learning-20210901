@@ -6,7 +6,7 @@
     <title>Sign-in</title>
 </head>
 <body>
-<p th:if="${loginError}" class="error">Error</p>
+<p th:if="${error}" class="error">Error</p>
 <p th:if="${verified}" class="info">OK</p>
 <form th:action="@{/login}" method="post">
     <input type="text" name = "username" placeholder="Username" required autofocus>

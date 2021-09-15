@@ -16,10 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.*;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -51,7 +48,7 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .and().formLogin()
                         .loginPage("/login")
                         .successHandler(getAuthSuccessHandler())
-                        .failureHandler(getAuthFailureHandler())
+                        //.failureHandler(getAuthFailureHandler())
                         .permitAll()
                     .and().logout()
                         .logoutSuccessUrl("/")
@@ -70,16 +67,16 @@ public class BaseSecurityConfiguration extends WebSecurityConfigurerAdapter {
         };
     }
 
-    @Bean
-    AuthenticationFailureHandler getAuthFailureHandler() {
-        return new SimpleUrlAuthenticationFailureHandler() {
-            @Override
-            public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-                System.out.println("--------------Failure:"+exception);
-                super.onAuthenticationFailure(request, response, exception);
-            }
-        };
-    }
+//    @Bean
+//    ExceptionMappingAuthenticationFailureHandler getAuthFailureHandler() {
+//        return new ExceptionMappingAuthenticationFailureHandler() {
+//            @Override
+//            public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+//                System.out.println("--------------Failure:"+exception);
+//                super.onAuthenticationFailure(request, response, exception);
+//            }
+//        };
+//    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
