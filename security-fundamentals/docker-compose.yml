@@ -1,0 +1,10 @@
+version: '3.8'
+
+networks:
+  default:
+
+services:
+  tomcat:
+    image: tomcat:9-jdk11
+    ports:
+      - "8888:8080"
