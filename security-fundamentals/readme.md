@@ -32,4 +32,12 @@ Login action: spring provides an implementation, url can be customized:
 .loginPage("/login")
 .loginProcessingUrl("/perform_login")   //no need to implement, has default implementation
 ```
+DB based login
+-
+passwords are using bcrypt by default, generate example:
+```
+BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        System.out.println("----:"+encoder.encode("password"));
 
+```
+sql: sql_data.md
