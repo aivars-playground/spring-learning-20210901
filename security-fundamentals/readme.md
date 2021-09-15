@@ -41,3 +41,18 @@ BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 ```
 sql: sql_data.md
+
+
+LDAP based login
+-
+an option - authenticate by one resource
+add details, roles by another...
+
+
+```java
+auth.ldapAuthentication()
+        ...
+.and()
+.userDetailsContextMapper(customUserContextMapper);
+```
+

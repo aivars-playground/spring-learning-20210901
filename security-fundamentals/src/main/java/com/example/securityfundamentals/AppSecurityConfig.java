@@ -1,5 +1,6 @@
 package com.example.securityfundamentals;
 
+import com.example.securityfundamentals.customization.CustomUserContextMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,7 +47,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     }
 
-
     @Bean
     AuthenticationSuccessHandler getAuthSuccessHandler() {
         return new SavedRequestAwareAuthenticationSuccessHandler() {
@@ -69,8 +69,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         };
     }
 
-
-
     //default data source (configured in properties)
     @Resource
     private DataSource dataSource;
@@ -83,6 +81,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Resource
+    private CustomUserContextMapper customUserContextMapper;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         if (authType.equals("INMEMORY")) {
@@ -92,10 +93,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         } else if(authType.equals("DB")) {
             System.out.println("--------------------DB::db_user/pass");
             auth.jdbcAuthentication().dataSource(dataSource);
-//ADD user
-//                    .withUser("db_user")
-//                    .password(passwordEncoder().encode("pass"))
-//                    .roles("USER");
+                    //ADD user
+                    //.withUser("db_user")
+                    //.password(passwordEncoder().encode("pass"))
+                    //.roles("USER");
         } else if(authType.equals("LDAP")) {
             System.out.println("--------------------LDAP:ldap_user/pass");
             auth.ldapAuthentication()
@@ -106,7 +107,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .passwordCompare()
                     .passwordEncoder(passwordEncoder())
-                    .passwordAttribute("userPassword");
+                    .passwordAttribute("userPassword")
+                    .and()
+                    .userDetailsContextMapper(customUserContextMapper);
         }
     }
 }
