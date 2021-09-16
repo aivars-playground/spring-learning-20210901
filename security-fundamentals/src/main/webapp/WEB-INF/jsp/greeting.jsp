@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,5 +10,11 @@
 </head>
 <body>
 <h1>${message}</h1>
+
+<sec:authorize access="hasAnyRole(\'ROLE_ADMIN\')">
+    superstar
+</sec:authorize>
+
+
 </body>
 </html>

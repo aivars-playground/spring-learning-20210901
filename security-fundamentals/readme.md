@@ -72,3 +72,12 @@ Mailhog
 sendemail -f from@local -t to@domain.com -u subject -m "message" -s localhost:1025
 ```
 
+
+Annotation Based Security
+-
+adding EnableGlobalMethodSecurity to WebSecurityConfigurerAdapter causes new tet uer to be created, see logs)
+Using generated security password:
+
+
+
+
