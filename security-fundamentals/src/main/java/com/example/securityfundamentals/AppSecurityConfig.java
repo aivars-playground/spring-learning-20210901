@@ -38,6 +38,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/anonymous/*").anonymous()
                 .antMatchers("/", "/index.html").permitAll()
+                .antMatchers("/create_account").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
@@ -137,12 +138,14 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         }
     }
 
+    @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
                 .antMatchers("/assets/css/**", "/assets/js/**", "/assets/images/**", "/webjars/**")
-                .and()
-                .debug(true);
+                //.and()
+                //.debug(true)
+        ;
     }
 
 }

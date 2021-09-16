@@ -14,3 +14,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: test-db
+  mailer:
+    image: mailhog/mailhog:latest
+    container_name: my_mailer
+    ports:
+      - "8025:8025"
+      - "1025:1025"

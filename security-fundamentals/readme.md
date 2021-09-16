@@ -2,6 +2,16 @@ Setup
 =
 This application is running on a tomcat...  
 
+
+Debugging authorization
+-
+```java
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.debug(true);
+    }
+```
+
 Note on routing
 -
 localhost:8080, loacalhost:8080/, and loacalhost:8080/index.html points to the same location in our scenario
@@ -54,5 +64,11 @@ auth.ldapAuthentication()
         ...
 .and()
 .userDetailsContextMapper(customUserContextMapper);
+```
+
+Mailhog
+-
+```
+sendemail -f from@local -t to@domain.com -u subject -m "message" -s localhost:1025
 ```
 
