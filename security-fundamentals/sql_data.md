@@ -14,6 +14,17 @@ create table authorities
     constraint fk_authorities_users foreign key (username) references users (username)
 );
 create unique index ix_auth_username on authorities (username, authority);
+
+create table persistent_logins
+(
+    series    varchar(64)                         not null
+        primary key,
+    username  varchar(50)                         not null,
+    token     varchar(64)                         not null,
+    last_used timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
+    constraint persistent_logins_users_username_fk
+        foreign key (username) references users (username)
+);
 ```
 
 user/password

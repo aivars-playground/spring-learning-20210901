@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AndRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -34,9 +37,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/anonymous/*").anonymous()
-                .antMatchers("/assets/css/**", "/assets/js/**", "/assets/images/**", "/webjars/**").permitAll()
                 .antMatchers("/", "/index.html").permitAll()
                 .anyRequest().authenticated()
+
+                .and()
+                .rememberMe()
+                .key("secret")
+                .tokenRepository(persistentTokenRepository())
 
                 .and()
                 .formLogin()
@@ -55,6 +62,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .permitAll()
         ;
+    }
+
+    @Bean
+    PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+        return tokenRepository;
     }
 
     @Bean
@@ -122,4 +136,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .userDetailsContextMapper(customUserContextMapper);
         }
     }
+
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/assets/css/**", "/assets/js/**", "/assets/images/**", "/webjars/**")
+                .and()
+                .debug(true);
+    }
+
 }

@@ -9,6 +9,9 @@
     <link href="webjars/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<c:if test="${not empty param.logout}">
+    Logged out!!!
+</c:if>
 <c:if test="${not empty param.error}">
     ERR in param!!!
 </c:if>
