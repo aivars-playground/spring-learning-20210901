@@ -80,4 +80,22 @@ Using generated security password:
 
 
 
+Getting current user
+=
+```java
+    @GetMapping("/principal")
+    public Principal loginDetails(
+            Authentication auth,
+            Principal principal) {
 
+        System.out.println("---auth:"+auth);
+        System.out.println("---auth.details:"+auth.getDetails());
+        System.out.println("---principal:"+principal);
+
+        var alternative = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println("---alternative:"+alternative);
+
+
+        return principal;
+    }
+```
