@@ -62,4 +62,14 @@ ha1 = MD5(<user>:<realm>:<password>)
 AppWebSecurityConfigDigest
 ```
 
+hardcoded pin
+-
+handled as additional details   
+implementation looks ugly, try keeping user data sources separate for each auth type
+```java
+org.springframework.security.core.Authentication#getDetails()
+```
+main idea -date source should retrieve pin (encrypted!!!)  
+AdditionalAuthenticationDetails are extracting pin from the request  
+reusing existing logic for username/auth) validation
 

@@ -22,4 +22,9 @@ public class ExampleController {
         return "dummy";
     }
 
+    @GetMapping("/pin")
+    public String pin() {
+        return "dummy";
+    }
+
 }
