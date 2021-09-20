@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @Order(99)
-public class AppWebSecurityConfigBasic extends WebSecurityConfigurerAdapter {
+public class AppWebSecurityConfig099Basic extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

@@ -34,7 +34,7 @@ import java.util.Optional;
 
 @Configuration
 @Order(97)
-public class AppWebSecurityConfigPin extends WebSecurityConfigurerAdapter {
+public class AppWebSecurityConfig097Pin extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

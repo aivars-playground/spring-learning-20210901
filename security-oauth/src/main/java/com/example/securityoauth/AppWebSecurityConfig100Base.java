@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration("Filter-Basic")
-public class AppWebSecurityConfigBase extends WebSecurityConfigurerAdapter {
+public class AppWebSecurityConfig100Base extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

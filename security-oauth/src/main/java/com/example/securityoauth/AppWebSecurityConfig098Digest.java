@@ -23,7 +23,7 @@ import java.util.List;
 
 @Configuration
 @Order(98)
-public class AppWebSecurityConfigDigest extends WebSecurityConfigurerAdapter {
+public class AppWebSecurityConfig098Digest extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
