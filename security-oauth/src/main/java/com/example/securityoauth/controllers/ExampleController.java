@@ -27,4 +27,9 @@ public class ExampleController {
         return "dummy";
     }
 
+    @GetMapping("/with_2fa")
+    public String with2FA() {
+        return "dummy";
+    }
+
 }
