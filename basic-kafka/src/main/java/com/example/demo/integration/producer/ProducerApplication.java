@@ -70,7 +70,7 @@ public class ProducerApplication {
     KafkaItemWriter<Long, Customer> kafkaTopicWriter() {
         return new KafkaItemWriterBuilder<Long, Customer>()
                 .kafkaTemplate(kafkaTemplate)
-                .itemKeyMapper(Customer::getId)
+                .itemKeyMapper(Customer::id)
                 .build();
     }
 }

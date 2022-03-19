@@ -80,7 +80,7 @@ public class ConsumerApplication {
         return new ItemWriter<Customer>() {
             @Override
             public void write(List<? extends Customer> items) throws Exception {
-                LOGGER.info("received items- count:" + items.size() + " values:"+ items.stream().map(Customer::getId).map(Long::toUnsignedString).collect(Collectors.joining(".")));
+                LOGGER.info("received items- count:" + items.size() + " values:"+ items.stream().map(Customer::id).map(Long::toUnsignedString).collect(Collectors.joining(".")));
             }
         };
     }
